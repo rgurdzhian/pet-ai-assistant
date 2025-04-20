@@ -20,7 +20,7 @@ const Welcome = () => {
                 <View style={styles.footer}>
                     <Animated.View entering={FadeInDown.duration(1000).springify().damping(12)} style={{ alignItems: 'center' }}>
                         <Typography size={30} fontWeight={'800'}>Always take control</Typography>
-                        <Typography size={30} fontWeight={'800'}>of your pets</Typography>
+                        <Typography size={30} fontWeight={'800'}>of your pet needs</Typography>
                     </Animated.View>
                     <Animated.View entering={FadeInDown.duration(1000).delay(200).springify().damping(12)} style={{ alignItems: 'center', gap: 2 }}>
                         <Typography size={17} color={colors.textLight}>AI assistant to set a better</Typography>
