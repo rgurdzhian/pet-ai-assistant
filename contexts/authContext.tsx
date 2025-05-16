@@ -33,7 +33,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             await signInWithEmailAndPassword(auth, email, password)
             return { success: true }
         } catch (error: any) {
-            return { success: false, msg: error.message }
+            let msg = error.message;
+            if (error.message.includes('auth/invalid-credential')) msg = "Wrong Credentials";
+            if (error.message.includes('auth/invalid-email')) msg = "Invalid Email";
+
+            return { success: false, msg }
         }
     }
 
