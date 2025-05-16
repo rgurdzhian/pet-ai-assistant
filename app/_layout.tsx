@@ -12,9 +12,11 @@ const StackLayout = () => {
 }
 
 export default function RootLayout() {
-    return <AuthProvider>
-        <StackLayout />
-    </AuthProvider>
+    return (
+        <AuthProvider>
+            <StackLayout />
+        </AuthProvider>
+    )
 }
 
 const styles = StyleSheet.create({})

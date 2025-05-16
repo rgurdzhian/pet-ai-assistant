@@ -26,6 +26,12 @@ const Register = () => {
         }
         setIsLoading(true);
         const res = await registerUser(emailRef.current, passwordRef.current, fullNameRef.current);
+
+        setIsLoading(false);
+
+        if (!res.success) {
+            Alert.alert('Sign Up', res.msg)
+        }
     }
 
     return (
