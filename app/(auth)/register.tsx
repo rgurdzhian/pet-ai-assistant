@@ -9,22 +9,23 @@ import Input from '@/components/Input'
 import * as Icons from 'phosphor-react-native'
 import Button from '@/components/Button'
 import { useRouter } from 'expo-router'
+import { useAuth } from '@/contexts/authContext'
 
 const Register = () => {
     const router = useRouter();
     const emailRef = useRef('');
     const passwordRef = useRef('');
-    const fullName = useRef('');
-    const [isLoading, setIsLoading] = useState(false)
+    const fullNameRef = useRef('');
+    const [isLoading, setIsLoading] = useState(false);
+    const { register: registerUser } = useAuth();
 
     const handleSubmit = async () => {
-        if (!emailRef.current || !passwordRef.current || !fullName.current) {
+        if (!emailRef.current || !passwordRef.current || !fullNameRef.current) {
             Alert.alert('Sign up', 'Please fill all the fields');
             return;
         }
         setIsLoading(true);
-        console.log("email", emailRef.current);
-        console.log("password", passwordRef.current);
+        const res = await registerUser(emailRef.current, passwordRef.current, fullNameRef.current);
     }
 
     return (
@@ -37,7 +38,7 @@ const Register = () => {
                 </View>
                 <View style={styles.form}>
                     <Typography size={16} color={colors.textLighter}>Create an account to get pet assistance</Typography>
-                    <Input placeholder='Enter your Full Name' icon={<Icons.User weight='fill' color={colors.neutral300} size={verticalScale(26)} />} onChangeText={value => fullName.current = value} />
+                    <Input placeholder='Enter your Full Name' icon={<Icons.User weight='fill' color={colors.neutral300} size={verticalScale(26)} />} onChangeText={value => fullNameRef.current = value} />
                     <Input placeholder='Enter your email' icon={<Icons.At weight='fill' color={colors.neutral300} size={verticalScale(26)} />} onChangeText={value => emailRef.current = value} />
                     <Input secureTextEntry placeholder='Enter your password' icon={<Icons.Lock weight='fill' color={colors.neutral300} size={verticalScale(26)} />} onChangeText={value => passwordRef.current = value} />
                     <Button loading={isLoading} onPress={handleSubmit}>
